@@ -14,35 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import cgi
-from google.appengine.api import users
 import webapp2
 
-MAIN_PAGE_HTML = """\
-<html>
-  <body>
-    <form action="/sign" method="post">
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Sign Guestbook"></div>
-    </form>
-  </body>
-</html>
-"""
-
-
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write(MAIN_PAGE_HTML)
-
-
-class Guestbook(webapp2.RequestHandler):
-    def post(self):
-        self.response.write('<html><body>You wrote:<pre>')
-        self.response.write(cgi.escape(self.request.get('content')))
-        self.response.write('</pre></body></html>')
-
+from handlers import main_handler, sensor_handler
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/sign', Guestbook)
+    ('/', main_handler.MainHandler),
+    ('/sensor', sensor_handler.SensorHandler)
 ], debug=True)

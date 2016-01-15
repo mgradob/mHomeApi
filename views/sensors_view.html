@@ -1,0 +1,13 @@
+{% extends "base_view.html" %}
+
+{% block title %}mHome Sensors{% endblock %}
+
+{% block content %}
+<h1>Sensors</h1>
+
+{% for sensor in sensors_list %}
+<h2>{{ sensor.name }}</h2>
+<p>{{ sensor.id }} {{ sensor.address }}</p>
+{% endfor %}
+
+{% endblock %}
